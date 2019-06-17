@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './components/Layout/Layout';
+import OrderBuilder from './containers/OrderBuilder/OrderBuilder'
 
 
 class App extends Component {
@@ -7,7 +8,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <h1>Hello :)</h1>
+          <OrderBuilder></OrderBuilder>
         </Layout>
       </div>
     );
