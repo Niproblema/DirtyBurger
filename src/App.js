@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout/Layout';
+import Layout from './containers/Layout/Layout';
 //import OrderBuilder from './containers/OrderBuilder/OrderBuilder'; //TODO: add back instead of burgerBuilder
 import BurgerBuilder from './containers/CustomFood/BurgerBuilder';
 
