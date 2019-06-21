@@ -4,9 +4,9 @@ import Backdrop from '../../UI/Backdrop/Backdrop'
 import Auxiliary from '../../../hoc/Auxiliary'
 
 class Modal extends Component {
-    shouldComponentUpdate(nextProps, nextState){
+/*     shouldComponentUpdate(nextProps, nextState){ //TODO: reenable later, for release
         return nextProps.shown !== this.props.shown;
-    }
+    } */
 
     render() {
         return (

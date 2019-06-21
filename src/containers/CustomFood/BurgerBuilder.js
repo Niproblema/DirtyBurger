@@ -4,6 +4,8 @@ import Burger from '../../components/Food/CustomBuild/Burger/Burger';
 import BuildController from '../../components/Food/CustomBuild/Burger/BuildController/BuildController';
 import Modal from '../../components/UI/Modal/Modal'
 import OrderSummary from '../../components/Order/OrderSummary'
+import axios from '../../axios-link';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const PRICES = {
     salad: 0.4,
@@ -27,7 +29,8 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         price: PRICES.basePrice,
-        confirmationModalShown: false
+        confirmationModalShown: false,
+        loadingOrder: false
     };
 
 
@@ -70,7 +73,22 @@ class BurgerBuilder extends Component {
     }
 
     confirmationContinueHandler = () => {
-        alert('Checked out!');
+        const order = {
+            ingredient: this.state.ingredients,
+            price: this.state.price,
+            info: "Burger ordered from DirtyBurger App!"
+        }
+        axios.post('/burgerTest.json', order)
+            .then(response => {
+                console.log(response);
+                this.setState({ loadingOrder: false, confirmationModalShown: false });
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({ loadingOrder: false, confirmationModalShown: false });
+            });
+        //this.confirmationCancelHandler();
+        this.setState({ loadingOrder: true });
     }
 
     getPrice = () => this.state.price.toFixed(2);
@@ -82,10 +100,14 @@ class BurgerBuilder extends Component {
             addEnabled[key] = addEnabled[key] < LIMITS.upper;
             removeEnabled[key] = removeEnabled[key] > LIMITS.lower;
         }
+
+        const modalContent = this.state.loadingOrder ?
+            <Spinner /> : <OrderSummary price={this.getPrice()} cancel={this.confirmationCancelHandler} continue={this.confirmationContinueHandler} items={this.state.ingredients} />;
+
         return (
             <Auxiliary>
                 <Modal shown={this.state.confirmationModalShown} modalClose={this.confirmationCancelHandler}>
-                    <OrderSummary price={this.getPrice()} cancel={this.confirmationCancelHandler} continue={this.confirmationContinueHandler} items={this.state.ingredients} />
+                    {modalContent}
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildController
