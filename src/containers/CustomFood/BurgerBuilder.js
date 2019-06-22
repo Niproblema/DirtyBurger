@@ -34,6 +34,13 @@ class BurgerBuilder extends Component {
         loadingOrder: false
     };
 
+    /* componentDidMount(){
+        axios.get('/ingredientsTest.json') //EXAMPLE ON GETTIN DATA-INITIAL SETUP
+        .then(response =>{
+            this.setState({ingredients: response.data});
+        }).catch(err => console.log(err.message));
+    }
+ */
 
     addIngredientHandler = (type) => {
         let oldState = { ...this.state.ingredients };
