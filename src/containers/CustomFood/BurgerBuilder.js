@@ -90,6 +90,7 @@ class BurgerBuilder extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({ loadingOrder: false, confirmationModalShown: false });
+                this.props.history.replace('checkout/contact-data');
             })
             .catch(error => {
                 console.log(error);
