@@ -4,6 +4,7 @@ import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/CustomFood/BurgerBuilder';
 import { Route, Switch } from 'react-router-dom'
 import ContactData from './containers/Checkout/ContactData/ContactData'
+import Orders from './containers/Orders/Orders'
 
 
 
@@ -14,7 +15,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/checkout/contact-data" component={ContactData} />
-            {/*<Route path="/checkout"  />*/}
+            <Route path="/orders" component={Orders}  />
             <Route path="/" component={BurgerBuilder} />
           </Switch>
         </Layout>

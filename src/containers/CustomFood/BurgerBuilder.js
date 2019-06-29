@@ -81,23 +81,7 @@ class BurgerBuilder extends Component {
     }
 
     confirmationContinueHandler = () => {
-        const order = {
-            ingredient: this.state.ingredients,
-            price: this.state.price,
-            info: "Burger ordered from DirtyBurger App!"
-        }
-        axios.post('/burgerTest.json', order)
-            .then(response => {
-                console.log(response);
-                this.setState({ loadingOrder: false, confirmationModalShown: false });
-                this.props.history.replace('checkout/contact-data');
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({ loadingOrder: false, confirmationModalShown: false });
-            });
-        //this.confirmationCancelHandler();
-        this.setState({ loadingOrder: true });
+        this.props.history.push('checkout/contact-data', { ingredients: this.state.ingredients, price: this.state.price });
     }
 
     getPrice = () => this.state.price.toFixed(2);
