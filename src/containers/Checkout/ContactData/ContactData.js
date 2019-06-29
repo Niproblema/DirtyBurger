@@ -7,11 +7,57 @@ import Input from '../../../components/UI/Input/Input'
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            postalCode: ''
+        orderForm: {
+            name: {
+                inp_type: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: ""
+            },
+            country: {
+                inp_type: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Country'
+                },
+                value: ""
+            },
+            street: {
+                inp_type: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Street'
+                },
+                value: ""
+            },
+            zip: {
+                inp_type: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Zip Code'
+                },
+                value: ""
+            },
+            email: {
+                inp_type: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your Email'
+                },
+                value: ""
+            },
+            deliveryMethod: {
+                inp_type: 'select',
+                elementConfig: {
+                    options: [
+                        { value: 'fastest', displayValue: 'Fastest' },
+                        { value: 'cheapest', displayValue: 'Cheapest' },
+                    ]
+                },
+                value: ""
+            }
         },
         loadingOrder: false,
         confirmationModalShown: false
@@ -29,7 +75,7 @@ class ContactData extends Component {
 
         this.setState({ loadingOrder: true });
 
-        const order = {
+        /* const order = {
             ingredients: this.props.location.state.ingredients,
             price: this.props.location.state.price,
             constumer: {
@@ -38,35 +84,57 @@ class ContactData extends Component {
                     state: "Temp State",
                     street: "Temp Street 1",
                     zip: "1234"
-                }
+                },
+                email: "temp@gmail.com"
             },
             deliveryMethod: "Fastests",
             info: "Burger ordered from DirtyBurger App!"
-        }
-        axios.post('/dbOrders.json', order)
-            .then(response => {
-                console.log(response);
-                this.setState({ loadingOrder: false, confirmationModalShown: false });
-                this.props.history.push('/')
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({ loadingOrder: false, confirmationModalShown: false });
-            });
+        }*/
+        /*         axios.post('/dbOrders.json', order)
+                    .then(response => {
+                        console.log(response);
+                        this.setState({ loadingOrder: false, confirmationModalShown: false });
+                        this.props.history.push('/')
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.setState({ loadingOrder: false, confirmationModalShown: false });
+                    }); */
 
     }
 
+    inputChangedHandler = (event, inputID) => {
+        const stateShallowCopy = {...this.state.orderForm};
+        const toChangeField = { ...stateShallowCopy[inputID] };
+        toChangeField.value = event.target.value;
+        stateShallowCopy[inputID] = toChangeField;
+        this.setState({ orderForm : stateShallowCopy });
+    }
+
     render() {
+        const formElementsArr = [];
+        for (let key in this.state.orderForm) {
+            formElementsArr.push({
+                id: key,
+                config: this.state.orderForm[key]
+            });
+        }
+
         let form = null
         if (this.state.loadingOrder) {
             form = <Spinner />
         } else {
             form = (
                 <form>
-                    <Input type="text" name="name" placeholder="Your name" />
-                    <Input type="text" name="email" placeholder="Your email" />
-                    <Input type="text" name="street" placeholder="Street Adress" />
-                    <Input type="text" name="postal" placeholder="Postal Code" />
+                    {formElementsArr.map(el => (
+                        <Input
+                            key={el.id}
+                            inp_type={el.config.inp_type}
+                            elementConfig={el.config.elementConfig}
+                            value={el.config.value}
+                            changed={(event) => this.inputChangedHandler(event, el.id)}
+                        />
+                    ))}
                     <Button btnType="Success" clicked={this.orderHandler}>Finalize Order</Button>
                 </form>
             )
