@@ -3,6 +3,7 @@ import Button from '../../../components/UI/Buttons/AcceptDecline/Button'
 import Classes from './ContactData.css'
 import axios from '../../../axios-link';
 import Spinner from '../../../components/UI/Spinner/Spinner'
+import Input from '../../../components/UI/Input/Input'
 
 class ContactData extends Component {
     state = {
@@ -62,10 +63,10 @@ class ContactData extends Component {
         } else {
             form = (
                 <form>
-                    <input className={Classes.Input} type="text" name="name" placeholder="Your name" />
-                    <input className={Classes.Input} type="text" name="email" placeholder="Your email" />
-                    <input className={Classes.Input} type="text" name="street" placeholder="Street Adress" />
-                    <input className={Classes.Input} type="text" name="postal" placeholder="Postal Code" />
+                    <Input type="text" name="name" placeholder="Your name" />
+                    <Input type="text" name="email" placeholder="Your email" />
+                    <Input type="text" name="street" placeholder="Street Adress" />
+                    <Input type="text" name="postal" placeholder="Postal Code" />
                     <Button btnType="Success" clicked={this.orderHandler}>Finalize Order</Button>
                 </form>
             )
