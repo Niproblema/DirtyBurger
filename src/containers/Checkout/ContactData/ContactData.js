@@ -75,40 +75,36 @@ class ContactData extends Component {
 
         this.setState({ loadingOrder: true });
 
-        /* const order = {
+        const formData = {};
+        for (let formElementKey in this.state.orderForm) {
+            formData[formElementKey] = this.state.orderForm[formElementKey].value;
+        }
+        
+
+        const order = {
             ingredients: this.props.location.state.ingredients,
             price: this.props.location.state.price,
-            constumer: {
-                name: "placeholder",
-                address: {
-                    state: "Temp State",
-                    street: "Temp Street 1",
-                    zip: "1234"
-                },
-                email: "temp@gmail.com"
-            },
-            deliveryMethod: "Fastests",
-            info: "Burger ordered from DirtyBurger App!"
-        }*/
-        /*         axios.post('/dbOrders.json', order)
-                    .then(response => {
-                        console.log(response);
-                        this.setState({ loadingOrder: false, confirmationModalShown: false });
-                        this.props.history.push('/')
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        this.setState({ loadingOrder: false, confirmationModalShown: false });
-                    }); */
+            orderData: formData
+        }
+        axios.post('/dbOrders.json', order)
+            .then(response => {
+                console.log(response);
+                this.setState({ loadingOrder: false, confirmationModalShown: false });
+                this.props.history.push('/')
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({ loadingOrder: false, confirmationModalShown: false });
+            });
 
     }
 
     inputChangedHandler = (event, inputID) => {
-        const stateShallowCopy = {...this.state.orderForm};
+        const stateShallowCopy = { ...this.state.orderForm };
         const toChangeField = { ...stateShallowCopy[inputID] };
         toChangeField.value = event.target.value;
         stateShallowCopy[inputID] = toChangeField;
-        this.setState({ orderForm : stateShallowCopy });
+        this.setState({ orderForm: stateShallowCopy });
     }
 
     render() {
@@ -125,7 +121,7 @@ class ContactData extends Component {
             form = <Spinner />
         } else {
             form = (
-                <form>
+                <form onSubmit={this.orderHandler}>
                     {formElementsArr.map(el => (
                         <Input
                             key={el.id}
@@ -135,7 +131,7 @@ class ContactData extends Component {
                             changed={(event) => this.inputChangedHandler(event, el.id)}
                         />
                     ))}
-                    <Button btnType="Success" clicked={this.orderHandler}>Finalize Order</Button>
+                    <Button btnType="Success">Finalize Order</Button>
                 </form>
             )
         }
