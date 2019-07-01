@@ -26,6 +26,11 @@
     background-color: #ccc;
 }
 
+.Invalid {
+    border : 1px solid red;
+    background-color: rgb(243, 127, 127);
+}
+
 /*@media (min-width: 500){
     .Input{
 
