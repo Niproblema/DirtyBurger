@@ -4,6 +4,7 @@ import Classes from './ContactData.css'
 import axios from '../../../axios-link';
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
+import {connect} from 'react-redux'
 
 class ContactData extends Component {
     state = {
@@ -101,7 +102,7 @@ class ContactData extends Component {
     orderHandler = (event) => {
         event.preventDefault();
 
-        if (!(this.props.location.state.ingredients && this.props.location.state.price))  //Cancel if props ain't set.
+        if (!(this.props.ings && this.props.price))  //Cancel if props ain't set.
             return; //TODO: return a real error....
 
         this.setState({ loadingOrder: true });
@@ -113,8 +114,8 @@ class ContactData extends Component {
 
 
         const order = {
-            ingredients: this.props.location.state.ingredients,
-            price: this.props.location.state.price,
+            ingredients: this.props.ings,
+            price: this.props.price,
             orderData: formData
         }
         axios.post('/dbOrders.json', order)
@@ -202,7 +203,15 @@ class ContactData extends Component {
             </div>
         );
     }
-
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return{
+        ings: state.ingredients,
+        price: state.price
+    }
+}
+
+
+
+export default connect(mapStateToProps)(ContactData);
