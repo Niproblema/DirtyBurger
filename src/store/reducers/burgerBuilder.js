@@ -40,6 +40,15 @@ const reducer = (state = initialState, action) => {
                 price: state.price - PRICES[action.ingredientType]
             };
 
+        case actionTypes.SET_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: {
+                    ...state.ingredients,
+                    ...action.ingredients
+                }
+            };
+
         default: return state;
     }
 }

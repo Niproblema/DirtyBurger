@@ -26,10 +26,12 @@ class BurgerBuilder extends Component {
 
     //EXAMPLE ON GETTIN DATA-INITIAL SETUP
     componentDidMount() {
-        axios.get('/ingredientsTest.json') 
-            .then(response => {
-                this.setState({ ingredients: response.data });
-            }).catch(err => console.log(err.message));
+        this.props.onInitIngredients();
+        /*         axios.get('/ingredientsTest.json') 
+                    .then(response => {
+                        console.log(response);
+                        this.setState({ ingredients: response.data });
+                    }).catch(err => console.log(err.message)); */
     }
 
     purchaseHandler = () => {
@@ -90,7 +92,8 @@ const mapDispatchToProps = dispatch => {
             dispatch(burgerBuilderActions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) => {
             dispatch(burgerBuilderActions.removeIngredient(ingName))
-        }
+        },
+        onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients())
     }
 }
 
