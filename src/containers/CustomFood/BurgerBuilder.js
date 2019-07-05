@@ -9,7 +9,7 @@ import OrderSummary from '../../components/Order/OrderSummary'
 import axios from '../../axios-link';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/ErrorHandling/withErrorHandler';
-import * as actionTypes from '../../store/actions'
+import * as burgerBuilderActions from '../../store/actions/index'; //Auto picks up index file, when pointing to root.
 
 
 
@@ -24,12 +24,13 @@ class BurgerBuilder extends Component {
         loadingOrder: false
     };
 
-    /* componentDidMount(){
-        axios.get('/ingredientsTest.json') //EXAMPLE ON GETTIN DATA-INITIAL SETUP
-        .then(response =>{
-            this.setState({ingredients: response.data});
-        }).catch(err => console.log(err.message));
-    }*/
+    //EXAMPLE ON GETTIN DATA-INITIAL SETUP
+    componentDidMount() {
+        axios.get('/ingredientsTest.json') 
+            .then(response => {
+                this.setState({ ingredients: response.data });
+            }).catch(err => console.log(err.message));
+    }
 
     purchaseHandler = () => {
         this.setState({ confirmationModalShown: true });
@@ -86,15 +87,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingName) =>
-            dispatch({
-                type: actionTypes.ADD_INGREDIENTS,
-                ingredientType: ingName
-            }),
+            dispatch(burgerBuilderActions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) => {
-            dispatch({
-                type: actionTypes.REMOVE_INGREDIENT,
-                ingredientType: ingName
-            })
+            dispatch(burgerBuilderActions.removeIngredient(ingName))
         }
     }
 }
