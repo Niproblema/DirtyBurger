@@ -4,7 +4,9 @@ import Classes from './ContactData.css'
 import axios from '../../../axios-link';
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import * as reduxActions from '../../../store/actions/index';
+import { Redirect } from 'react-router-dom';
 
 class ContactData extends Component {
     state = {
@@ -122,7 +124,8 @@ class ContactData extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({ loadingOrder: false, confirmationModalShown: false });
-                this.props.history.push('/')
+                //this.props.history.push('/')
+                this.props.onOrderFin();
             })
             .catch(error => {
                 console.log(error);
@@ -159,41 +162,47 @@ class ContactData extends Component {
     }
 
     render() {
-        const formElementsArr = [];
-        for (let key in this.state.orderForm) {
-            formElementsArr.push({
-                id: key,
-                config: this.state.orderForm[key]
-            });
-        }
-
-        let formValid = true;
-        formElementsArr.map(el => {
-            if (!el.config.validation.valid)
-                formValid = false;
-            return null;
-        });
-
         let form = null
-        if (this.state.loadingOrder) {
-            form = <Spinner />
+        if (!this.props.orderReady) {
+            form = <Redirect to="/" />
         } else {
-            form = (
-                <form onSubmit={this.orderHandler}>
-                    {formElementsArr.map(el => (
-                        <Input
-                            key={el.id}
-                            inp_type={el.config.inp_type}
-                            elementConfig={el.config.elementConfig}
-                            value={el.config.value}
-                            invalid={el.config.validation ? !el.config.validation.valid : false}
-                            touched={el.config.validation.touched}
-                            changed={(event) => this.inputChangedHandler(event, el.id)}
-                        />
-                    ))}
-                    <Button btnType="Success" disabled={!formValid}>Finalize Order</Button>
-                </form>
-            )
+
+            const formElementsArr = [];
+            for (let key in this.state.orderForm) {
+                formElementsArr.push({
+                    id: key,
+                    config: this.state.orderForm[key]
+                });
+            }
+
+            let formValid = true;
+            formElementsArr.map(el => {
+                if (!el.config.validation.valid)
+                    formValid = false;
+                return null;
+            });
+
+
+            if (this.state.loadingOrder) {
+                form = <Spinner />
+            } else {
+                form = (
+                    <form onSubmit={this.orderHandler}>
+                        {formElementsArr.map(el => (
+                            <Input
+                                key={el.id}
+                                inp_type={el.config.inp_type}
+                                elementConfig={el.config.elementConfig}
+                                value={el.config.value}
+                                invalid={el.config.validation ? !el.config.validation.valid : false}
+                                touched={el.config.validation.touched}
+                                changed={(event) => this.inputChangedHandler(event, el.id)}
+                            />
+                        ))}
+                        <Button btnType="Success" disabled={!formValid}>Finalize Order</Button>
+                    </form>
+                )
+            }
         }
 
         return (
@@ -206,12 +215,19 @@ class ContactData extends Component {
 }
 
 const mapStateToProps = state => {
-    return{
-        ings: state.ingredients,
-        price: state.price
+    return {
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.price,
+        orderReady: state.order.orderReady
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrderFin: () =>
+            dispatch(reduxActions.purchaseFin())
     }
 }
 
 
-
-export default connect(mapStateToProps)(ContactData);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactData);
