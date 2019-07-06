@@ -1,7 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    orderReady: false
+    orderReady: false,
+    orders : []
 }
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +17,22 @@ const reducer = (state = initialState, action) => {
                 ...state,   //Just in case I add some more fields.
                 orderReady: false
             };
+        case actionTypes.FETCH_ORDERS_START:
+            return {
+                ...state,  
+                //Set some flag to true.
+            };
+        case actionTypes.FETCH_ORDERS_SUCCESS:
+            return {
+                ...state,  
+                orders : action.orders
+            };
+        case actionTypes.FETCH_ORDERS_FAILED:
+            return {
+                ...state, 
+                //Set some error flag.
+            };
+
 
         default: return state;
     }
