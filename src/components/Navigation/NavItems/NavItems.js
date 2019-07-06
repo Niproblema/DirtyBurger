@@ -8,6 +8,7 @@ const NavItems = () => {
             <li className={classes.NavItem}>
                 <NavLink activeClassName={classes.active} to="/" exact>Builder</NavLink>
                 <NavLink activeClassName={classes.active} to="/orders" exact>Orders</NavLink>
+                <NavLink activeClassName={classes.active} to="/auth" exact>Login</NavLink>
             </li>
         </ul>
     );
