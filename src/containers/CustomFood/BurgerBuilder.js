@@ -35,7 +35,11 @@ class BurgerBuilder extends Component {
     }
 
     purchaseHandler = () => {
-        this.setState({ confirmationModalShown: true });
+        if (this.props.isAuth) {
+            this.setState({ confirmationModalShown: true });
+        } else {
+            this.props.history.push('/auth');
+        }
     }
 
     confirmationCancelHandler = () => {
@@ -74,7 +78,8 @@ class BurgerBuilder extends Component {
                     addEnabled={addEnabled}
                     removeEnabled={removeEnabled}
                     order={this.purchaseHandler}
-                    price={this.getPrice()} />
+                    price={this.getPrice()}
+                    isAuth={this.props.isAuth} />
             </Auxiliary>
         );
     }
@@ -83,7 +88,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients,
-        price: state.burgerBuilder.price
+        price: state.burgerBuilder.price,
+        isAuth: state.auth.token !== null
     }
 }
 
@@ -95,7 +101,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(reduxActions.removeIngredient(ingName))
         },
         onInitIngredients: () => dispatch(reduxActions.initIngredients()),
-        onInitPurchase : () => dispatch(reduxActions.purchaseInit())
+        onInitPurchase: () => dispatch(reduxActions.purchaseInit())
     }
 }
 

@@ -21,7 +21,7 @@ const BuildController = (props) => (
                 addEnabled={props.addEnabled[crtl.type]}
                 removeEnabled={props.removeEnabled[crtl.type]} />
         })}
-        <button className={classes.OrderButton} onClick={props.order}>NEXT</button>
+        <button className={classes.OrderButton} onClick={props.order}>{props.isAuth?'NEXT':'SIGN IN'}</button>
     </div>
 );
 

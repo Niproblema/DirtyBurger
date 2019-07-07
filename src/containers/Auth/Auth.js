@@ -5,6 +5,7 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import Classes from './Auth.css'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom';
 
 
 class Auth extends Component {
@@ -108,52 +109,49 @@ class Auth extends Component {
         }
 
         let errorMessage = null;
-        if(this.props.authError){
+        if (this.props.authError) {
             errorMessage = (<p className={Classes.ErrorMessage}>Error: {this.props.authError.message}</p>);
             //TODO: error codes.
         }
 
-
-
-
-        //if (!this.props.orderReady) {
-        //    form = <Redirect to="/" />
-        //} else {
-
-        const formElementsArr = [];
-        for (let key in this.state.loginForm) {
-            formElementsArr.push({
-                id: key,
-                config: this.state.loginForm[key]
-            });
-        }
-
-        let formValid = true;
-        formElementsArr.map(el => {
-            if (!el.config.validation.valid)
-                formValid = false;
-            return null;
-        });
-
-
-        if (this.props.isLoading) {
-            form = <Spinner />
+        if (this.props.isAuth) {
+            form = <Redirect to="/" />
         } else {
-            form =
-                (<form onSubmit={this.loginAttemptHandler}>
-                    {formElementsArr.map(el => (
-                        <Input
-                            key={el.id}
-                            inp_type={el.config.inp_type}
-                            elementConfig={el.config.elementConfig}
-                            value={el.config.value}
-                            invalid={el.config.validation ? !el.config.validation.valid : false}
-                            touched={el.config.validation.touched}
-                            changed={(event) => this.inputChangedHandler(event, el.id)}
-                        />
-                    ))}
-                    <Button btnType="Success" disabled={!formValid}>{formSubmitButtonText}</Button>
-                </form>)
+            const formElementsArr = [];
+            for (let key in this.state.loginForm) {
+                formElementsArr.push({
+                    id: key,
+                    config: this.state.loginForm[key]
+                });
+            }
+
+            let formValid = true;
+            formElementsArr.map(el => {     //TODO: Browser autofill messes this up btw
+                if (!el.config.validation.valid && !el.config.validation.touched)
+                    formValid = false;
+                return null;
+            });
+
+
+            if (this.props.isLoading) {
+                form = <Spinner />
+            } else {
+                form =
+                    (<form onSubmit={this.loginAttemptHandler}>
+                        {formElementsArr.map(el => (
+                            <Input
+                                key={el.id}
+                                inp_type={el.config.inp_type}
+                                elementConfig={el.config.elementConfig}
+                                value={el.config.value}
+                                invalid={el.config.validation ? !el.config.validation.valid : false}
+                                touched={el.config.validation.touched}
+                                changed={(event) => this.inputChangedHandler(event, el.id)}
+                            />
+                        ))}
+                        <Button btnType="Success" disabled={!formValid}>{formSubmitButtonText}</Button>
+                    </form>)
+            }
         }
 
         return (
@@ -170,7 +168,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         isLoading: state.auth.loading,
-        authError: state.auth.error
+        authError: state.auth.error,
+        isAuth: state.auth.token !== null
     }
 }
 
