@@ -10,6 +10,10 @@
 
 }
 
+.ErrorMessage{
+    color: rgb(189, 42, 42)
+}
+
 @media(min-width: 600px) {
     .Auth {
         width: 500px;

@@ -3,6 +3,9 @@ import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Buttons/AcceptDecline/Button'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import Classes from './Auth.css'
+import * as actions from '../../store/actions/index'
+import { connect } from 'react-redux'
+
 
 class Auth extends Component {
     state = {
@@ -25,7 +28,7 @@ class Auth extends Component {
                 inp_type: 'input',
                 elementConfig: {
                     type: 'password',
-                    placeholder: 'password'
+                    placeholder: 'Password'
                 },
                 value: "",
                 validation: {
@@ -35,7 +38,8 @@ class Auth extends Component {
                     touched: false
                 }
             }
-        }
+        },
+        isSignup: false
     }
 
     checkValidity = (value, rules) => {
@@ -65,7 +69,7 @@ class Auth extends Component {
         return isValid;
     }
 
-    inputChangedHandler(event, inputID) {
+    inputChangedHandler = (event, inputID) => {
         const stateShallowCopy = { ...this.state.loginForm };
         const toChangeField = { ...stateShallowCopy[inputID] };
         toChangeField.value = event.target.value;
@@ -78,14 +82,40 @@ class Auth extends Component {
         });
     }
 
-    loginAttemptHandler() {
-
+    loginAttemptHandler = (event) => {
+        event.preventDefault();
+        this.props.onAuth(this.state.loginForm.userName.value, this.state.loginForm.password.value, this.state.isSignup);
     }
 
-
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return { isSignup: !prevState.isSignup }
+        })
+    }
 
     render() {
         let form = null
+        // "Enter New Account Information" : "Enter Login Information";
+        let formTitle, formSubmitButtonText, formSwitchButtonText;
+        if (this.state.isSignup) {
+            formTitle = "Enter New Account Information";
+            formSubmitButtonText = "Sign Up";
+            formSwitchButtonText = "Login"
+        } else {
+            formTitle = "Enter Login Information";
+            formSubmitButtonText = "Login";
+            formSwitchButtonText = "Sign Up"
+        }
+
+        let errorMessage = null;
+        if(this.props.authError){
+            errorMessage = (<p className={Classes.ErrorMessage}>Error: {this.props.authError.message}</p>);
+            //TODO: error codes.
+        }
+
+
+
+
         //if (!this.props.orderReady) {
         //    form = <Redirect to="/" />
         //} else {
@@ -106,7 +136,7 @@ class Auth extends Component {
         });
 
 
-        if (false /*this.state.loadingOrder*/) {
+        if (this.props.isLoading) {
             form = <Spinner />
         } else {
             form =
@@ -122,17 +152,33 @@ class Auth extends Component {
                             changed={(event) => this.inputChangedHandler(event, el.id)}
                         />
                     ))}
-                    <Button btnType="Success" disabled={!formValid}>Login</Button>
+                    <Button btnType="Success" disabled={!formValid}>{formSubmitButtonText}</Button>
                 </form>)
         }
 
         return (
             <div className={Classes.Auth}>
-                <h4>Enter Login Information</h4>
+                <h4>{formTitle}</h4>
+                {errorMessage}
                 {form}
+                <Button btnType="Danger" clicked={this.switchAuthModeHandler}>Switch to {formSwitchButtonText}</Button>
             </div>
         );
     }
 }
 
-export default Auth;
+const mapStateToProps = state => {
+    return {
+        isLoading: state.auth.loading,
+        authError: state.auth.error
+    }
+}
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
