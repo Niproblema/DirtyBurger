@@ -35,6 +35,7 @@ class Orders extends Component {
     }
 
     render() {
+        //console.log("Rendeiring Orders"); //Debug
         //TODO: loading and error handling for user.
         return (
             <div>
