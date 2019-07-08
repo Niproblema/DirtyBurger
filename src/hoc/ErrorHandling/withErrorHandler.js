@@ -11,7 +11,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
         componentWillMount() {
             this.reqInter = axios.interceptors.request.use(req => {
-                //if (this.state.error !== null)  //Temp fix for changing state in unmounted component?
+                if (this.state.error !== null)  //Temp fix for changing state in unmounted component?
                     this.setState({ error: null });
                 return req;
             })
