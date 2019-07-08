@@ -74,7 +74,7 @@ export const authRenewState = () => {
         if (!token || !expirationDate || !userId || (new Date(expirationDate) < new Date())) {
             dispatch(authLogout());
         } else {
-            dispatch(authSuccess(token), userId);
+            dispatch(authSuccess(token, userId));
             dispatch(checkAuthTimeout(Math.floor(new Date(expirationDate).getTime() - new Date().getTime()) / 1000));
         }
     }
