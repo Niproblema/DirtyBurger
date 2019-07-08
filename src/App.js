@@ -7,19 +7,26 @@ import ContactData from './containers/Checkout/ContactData/ContactData'
 import Orders from './containers/Orders/Orders'
 import Auth from './containers/Auth/Auth'
 import Logout from './containers/Auth/Logout/Logout'
+import { connect } from 'react-redux'
+import * as actions from './store/actions/index'
 
 
 
 class App extends Component {
+
+  componentWillMount(){
+    this.props.renewAuthState();  //TODO: this shoudl be in initial redux auth store state, as method is deprecated and maybe affects performance
+  }
+
   render() {
     return (
       <div>
         <Layout>
           <Switch>
             <Route path="/checkout/contact-data" component={ContactData} />
-            <Route path="/logout" component={Logout}  />
-            <Route path="/orders" component={Orders}  />
-            <Route path="/auth" component={Auth}  />
+            <Route path="/logout" component={Logout} />
+            <Route path="/orders" component={Orders} />
+            <Route path="/auth" component={Auth} />
             <Route path="/" component={BurgerBuilder} />
           </Switch>
         </Layout>
@@ -28,4 +35,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    renewAuthState : () => dispatch(actions.authRenewState())
+  };
+}
+
+export default connect(null, mapDispatchToProps)(App);
