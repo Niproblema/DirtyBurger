@@ -10,7 +10,11 @@ import Logout from './containers/Auth/Logout/Logout'
 import { connect } from 'react-redux'
 import * as actions from './store/actions/index'
 
-
+/**
+ * Example of lazy async loading:
+ */
+//import asyncComponent from './hoc/asyncComponent/asyncComponent'
+//const asyncOrders = asyncComponent(() => import('./containers/Orders/Orders'));
 
 class App extends Component {
 

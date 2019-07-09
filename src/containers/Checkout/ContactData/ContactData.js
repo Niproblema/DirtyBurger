@@ -97,9 +97,7 @@ class ContactData extends Component {
         confirmationModalShown: false
     }
 
-    componentDidMount() {
-        console.log(this.props.location.state);
-    }
+
 
     orderHandler = (event) => {
         event.preventDefault();
@@ -123,13 +121,11 @@ class ContactData extends Component {
         }
         axios.post('/dbOrders.json?auth='+this.props.token, order)
             .then(response => {
-                console.log(response);
                 this.setState({ loadingOrder: false, confirmationModalShown: false });
                 //this.props.history.push('/')
                 this.props.onOrderFin();
             })
             .catch(error => {
-                console.log(error);
                 this.setState({ loadingOrder: false, confirmationModalShown: false });
             });
 

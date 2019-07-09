@@ -36,7 +36,6 @@ export const fetchOrders = () => {
     return dispatch => {
         axios.get('dbOrders.json')
         .then(res => {
-            console.log(res);
             const newOrders = [];
             for (let key in res.data) {
                 newOrders.push(
@@ -50,7 +49,6 @@ export const fetchOrders = () => {
             //this.setState({ orders: newOrders, loadingOrders: false })
         })
         .catch(err => {
-            //console.log(err);
             dispatch(fetchOrdersFailed(err));
             //this.setState({ loadingOrders: false })
         })

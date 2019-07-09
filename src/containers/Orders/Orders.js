@@ -15,7 +15,6 @@ class Orders extends Component {
     componentDidMount() {
         axios.get('dbOrders.json?auth=' + this.props.token + '&orderBy="userId"&equalTo="' + this.props.userId + '"')
             .then(res => {
-                console.log(res);
                 const newOrders = [];
                 for (let key in res.data) {
                     newOrders.push(
@@ -29,13 +28,11 @@ class Orders extends Component {
                 this.setState({ orders: newOrders, loadingOrders: false })
             })
             .catch(err => {
-                console.log(err);
                 this.setState({ loadingOrders: false })
             })
     }
 
     render() {
-        //console.log("Rendeiring Orders"); //Debug
         //TODO: loading and error handling for user.
         return (
             <div>
