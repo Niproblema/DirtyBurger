@@ -18,7 +18,7 @@ const LIMITS = {
     upper: 4
 }
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         confirmationModalShown: false,
         loadingOrder: false
