@@ -1,4 +1,4 @@
-<h1>Dirty Burger - wip</h1>
+<h1>Dirty Burger - Adapted after React - The Complete Guide (incl Hooks, React Router, Redux)</h1>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
