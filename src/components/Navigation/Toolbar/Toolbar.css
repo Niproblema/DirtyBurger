@@ -2,9 +2,10 @@
     height: 56px;
     width: 100%;
     position: fixed;
-    bottom: 0;
+    top: 0;
+    bottom: auto;
     left: 0;
-    background-color: #000;
+    background-color: #111;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,11 +19,18 @@
 }
 
 .Logo {
-    height: 80%;
+    height: 95%;
 }
 
 @media (max-width: 499px) {
+    /* Mobile */
     .DesktopOnly {
         display: none;
+    }
+    .Toolbar {
+        bottom: 0;
+        top: auto;
+        height: 56px;
+        /* Mobile should be different */
     }
 }

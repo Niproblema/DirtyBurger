@@ -1,4 +1,12 @@
-.Content{           /* Main */
+.Content {
+    /* Main */
+    margin-top: 0px;
     margin-bottom: 56px;
 }
 
+@media (min-width: 500px) {
+    .Content{
+        margin-top: 56px;
+        margin-bottom : 0px;
+    }
+}
