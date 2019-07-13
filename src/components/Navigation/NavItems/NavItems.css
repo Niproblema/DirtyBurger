@@ -1,4 +1,6 @@
+@import '../../../containers/Layout/Layout.css';
 .NavItems {
+    /* Mobile */
     margin: 0;
     padding: 0;
     list-style: none;
@@ -17,22 +19,22 @@
 
 .NavItem a {
     margin: 10px 0px;
-    color: #4CAF50;
+    color: var(--theme-color-main);
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
     display: block;
     font-weight: bold;
-    padding:6%;
+    padding: 6%;
 }
 
 .NavItem a:hover, .NavItem a:active, .NavItem a.active {
-    background-color: #333;
-    color: #fff;
-    
+    background-color: var(--theme-color-background);
+    color: var(--theme-color-selected);
 }
 
 @media (min-width: 500px) {
+    /* Desktop */
     .NavItems {
         flex-flow: row;
     }
@@ -44,13 +46,18 @@
         align-items: center;
     }
     .NavItem a {
-        color: fff;
+        color: var(--theme-color-main);
         height: 100%;
-        padding: 16px 10px;
-        border-bottom: 4px solid transparent;
+        border-bottom: 0 solid transparent;
+        padding: 0 calc(var(--layout-navbar-height-desktop) /5);
+        /*padding: 0;*/
+        margin: 0;
+        position: relative;
+        top: 0%;
+        font-size: calc( (var(--layout-navbar-height-desktop) / 5));
+        line-height: var(--layout-navbar-height-desktop);
     }
     .NavItem a:hover, .NavItem a:active, .NavItem a.active {
-        border-bottom: #fff;
-        border-bottom-style: solid;
+        border-bottom: calc(var(--layout-navbar-height-desktop) /15) solid var(--theme-color-selected);
     }
 }

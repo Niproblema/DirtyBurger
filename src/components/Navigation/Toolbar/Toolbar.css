@@ -1,11 +1,15 @@
+@import '../../../containers/Layout/Layout.css';
+
+
+
 .Toolbar {
-    height: 56px;
+    height: var(--layout-navbar-height-desktop);
     width: 100%;
     position: fixed;
     top: 0;
     bottom: auto;
     left: 0;
-    background-color: #111;
+    background-color: var(--theme-color-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,15 +26,15 @@
     height: 95%;
 }
 
-@media (max-width: 499px) {
-    /* Mobile */
+@media (max-width: 499px) {  /* Mobile */
+    
     .DesktopOnly {
         display: none;
     }
     .Toolbar {
         bottom: 0;
         top: auto;
-        height: 56px;
+        height: var(--layout-navbar-height-mobile);
         /* Mobile should be different */
     }
 }

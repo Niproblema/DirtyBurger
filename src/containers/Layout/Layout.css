@@ -1,12 +1,24 @@
-.Content {
-    /* Main */
+.Content { /* Mobile */    
     margin-top: 0px;
-    margin-bottom: 56px;
+    margin-bottom: var(--layout-navbar-height-mobile);
 }
 
 @media (min-width: 500px) {
     .Content{
-        margin-top: 56px;
+        margin-top: var(--layout-navbar-height-desktop);
         margin-bottom : 0px;
     }
+}
+
+
+:root {
+    /* Colors */
+    --theme-color-main: #4CAF50;
+    --theme-color-background: #111;
+    --theme-color-highlighted: #333;
+    --theme-color-selected: #fff;
+    /* Layout dimensions */
+    --layout-navbar-height-desktop: 95px;
+    --layout-navbar-height-mobile: 56px;
+
 }
