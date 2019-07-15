@@ -9,6 +9,7 @@ import Auth from './containers/Auth/Auth'
 import Logout from './containers/Auth/Logout/Logout'
 import { connect } from 'react-redux'
 import * as actions from './store/actions/index'
+import Menu from './containers/Menu/Menu'
 
 /**
  * Example of lazy async loading:
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="/logout" component={Logout} />
           <Route path="/orders" component={Orders} />
           <Route path="/auth" component={Auth} />
+          <Route path="/menu" component={Menu} />
           <Route path="/" component={BurgerBuilder} />
           <Redirect to="/" />
         </Switch>
@@ -39,6 +41,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/auth" component={Auth} />
+          <Route path="/menu" component={Menu} />
           <Route path="/" component={BurgerBuilder} />
           <Redirect to="/" />
         </Switch>

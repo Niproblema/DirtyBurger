@@ -1,4 +1,25 @@
-.Menu{
+.Menu {
     background-color: blue;
     text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.MenuMainContainer{
+    display: flex;
+    flex-flow: row;
+    flex: 1 1 auto;
+}
+
+:root {
+    /* Layout dimensions */
+    --menu-margin-big: 25px;
+    --menu-margin-med: 18px;
+    --menu-margin-sm: 10px;
+  
+  
+  
 }

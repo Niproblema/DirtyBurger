@@ -1,4 +1,22 @@
+@import '../../../containers//Menu/Menu.css';
+
 .LetterSelector{
     background-color: aqua;
     text-align: center;
+    margin: 0 1.5% var(--menu-margin-big) 3%;
+    width: 35px;
+}
+
+@media (max-height: 650px){
+    .LetterSelector{
+        width: 25px;
+        margin-bottom: var(--menu-margin-med) ; 
+    }
+}
+
+@media (max-height: 500px){
+    .LetterSelector{
+        width: 15px;
+        margin-bottom: var(--menu-margin-sm) ; 
+    }
 }

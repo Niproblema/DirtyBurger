@@ -7,12 +7,15 @@ import Auxiliary from '../../../hoc/Auxiliary';
 import { withRouter } from "react-router";
 
 const SideDrawer = (props) => {
+    //Todo: div around Backdrop temp fix-Drawer should close at some width
     return (
         <Auxiliary>
-            <Backdrop shown={props.shown} clicked={props.close} />
+            <div className={classes.BackdropExtra}> 
+                <Backdrop shown={props.shown} clicked={props.close} />
+            </div>
             <div className={classes.SideDrawer + " " + (props.shown ? classes.Open : classes.Closed)}>
                 <div className={classes.Logo}>
-                    <Logo clicked={() => {
+                    <Logo clicked={() => {          //Logo might be visible on narrow
                         props.close();
                         props.history.push('/')
                     }} />

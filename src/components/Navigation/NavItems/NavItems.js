@@ -15,6 +15,7 @@ const NavItems = (props) => {
         (
             <ul className={classes.NavItems}>
                 <li className={classes.NavItem}>
+                    <NavLink activeClassName={classes.active} onClick={linkClick} to="/menu" exact>Menu</NavLink>
                     <NavLink activeClassName={classes.active} onClick={linkClick} to="/" exact>Builder</NavLink>
                     <NavLink activeClassName={classes.active} onClick={linkClick} to="/orders" exact>Orders</NavLink>
                     <NavLink activeClassName={classes.active} onClick={linkClick} to="/logout" exact>Logout</NavLink>
@@ -24,6 +25,7 @@ const NavItems = (props) => {
         ) :
         (<ul className={classes.NavItems}>
             <li className={classes.NavItem}>
+                <NavLink activeClassName={classes.active} onClick={linkClick} to="/menu" exact>Menu</NavLink>
                 <NavLink activeClassName={classes.active} onClick={linkClick} to="/" exact>Builder</NavLink>
                 <NavLink activeClassName={classes.active} onClick={linkClick} to="/auth" exact>Login</NavLink>
             </li>

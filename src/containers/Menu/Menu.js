@@ -3,7 +3,7 @@ import classes from './Menu.css'
 import MenuContent from '../../components/Menu/MenuContent/MenuContent'
 import FoodLetterSelector from '../../components/Menu/MenuNav/FoodLetterSelector'
 import FoodTypeSelector from '../../components/Menu/MenuNav/FoodTypeSelector'
-
+//import Auxiliary from '../../hoc/Auxiliary'
 
 /* Food Menu btw */
 class Menu extends Component {
@@ -11,9 +11,12 @@ class Menu extends Component {
     render() {
         return (
             <div className={classes.Menu} >
-                <MenuContent />
-                <FoodLetterSelector />
                 <FoodTypeSelector />
+                <div className={classes.MenuMainContainer}>
+                    <FoodLetterSelector />
+                    <MenuContent />
+
+                </div>
             </div>
         );
     }

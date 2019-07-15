@@ -1,15 +1,19 @@
-.Content { /* Mobile */    
+.Content {
+    /* Mobile */
     margin-top: 0px;
     margin-bottom: var(--layout-navbar-height-mobile);
+    height: calc(100% - var(--layout-navbar-height-mobile));
+    position: absolute;
+    width: 100%;
 }
 
 @media (min-width: 500px) {
-    .Content{
+    .Content {
         margin-top: var(--layout-navbar-height-desktop);
-        margin-bottom : 0px;
+        margin-bottom: 0px;
+        height: calc(100% - var(--layout-navbar-height-desktop))
     }
 }
-
 
 :root {
     /* Colors */
@@ -20,5 +24,4 @@
     /* Layout dimensions */
     --layout-navbar-height-desktop: 95px;
     --layout-navbar-height-mobile: 56px;
-
 }

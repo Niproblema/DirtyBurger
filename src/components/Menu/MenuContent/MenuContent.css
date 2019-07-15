@@ -1,4 +1,21 @@
+@import '../../../containers/Menu/Menu.css';
+
 .MenuContent{
     background-color: blueviolet;
     text-align: center;
+    flex: 1 1 auto;
+    margin: 0 3% var(--menu-margin-big) 0;
+}
+
+
+@media (max-height: 650px){
+    .MenuContent{
+        margin-bottom: var(--menu-margin-med) ; 
+    }
+}
+
+@media (max-height: 500px){
+    .MenuContent{
+        margin-bottom: var(--menu-margin-sm) ; 
+    }
 }
