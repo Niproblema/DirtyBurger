@@ -4,6 +4,7 @@ import MenuContent from '../../components/Menu/MenuContent/MenuContent'
 import FoodLetterSelector from '../../components/Menu/MenuNav/FoodLetterSelector'
 import FoodTypeSelector from '../../components/Menu/MenuNav/FoodTypeSelector'
 //import Auxiliary from '../../hoc/Auxiliary'
+import firebase from '../../Database/Firebase/firebase'
 
 /* Food Menu btw */
 class Menu extends Component {

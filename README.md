@@ -1,4 +1,7 @@
-<h1>Dirty Burger - wip</h1>
+<h1>Dirty Burger - <strong>Unfinished - WiP</strong></h1>
+
+Setup project specific public configs in /private folder first.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
