@@ -40,5 +40,5 @@ _SpecRunner.html
 __benchmarks__
 
 # Private configs
-private/*
-!private/README.md
+/src/private/*
+!/src/private/README.md
