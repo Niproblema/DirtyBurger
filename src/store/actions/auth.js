@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 //import axios from '../../axios-link';
+import firebaseConfig from '../../private/firebaseConfig';
 import axios from 'axios';
 
 export const authStart = () => {
@@ -45,8 +46,8 @@ export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
         let url = isSignup ?
-            'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCNDFKfb_40rOyJEWTcyf8-OnQWFsu39yk'
-            : 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCNDFKfb_40rOyJEWTcyf8-OnQWFsu39yk';
+            'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' + firebaseConfig.apiKey
+            : 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=' + firebaseConfig.apiKey;
         axios.post(url,
             {
                 email: email,
