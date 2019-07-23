@@ -13,3 +13,8 @@ export {
     authLogout,
     authRenewState
 } from './auth'
+export {
+    fetchMenu,
+    pushMenu,
+    patchMenu
+} from './menu'
