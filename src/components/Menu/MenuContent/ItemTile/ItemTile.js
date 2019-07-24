@@ -1,5 +1,5 @@
-import react from 'react'
-
+import React from 'react'
+import classes from './ItemTile.css'
 
 /**
  * ItemTile - Holds item image(icon/photo) + description(short/long) + add to order button.
@@ -7,7 +7,11 @@ import react from 'react'
  * @param {item, expandable} props 
  */
 const ItemTile = (props) => {
-
+    return (
+        <div className={classes.ItemTile} >
+            {props.item.name}
+        </div>
+    );
 }
 
 export default ItemTile;

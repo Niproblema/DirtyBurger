@@ -7,6 +7,17 @@
     width: 100%;
 }
 
+:root {
+    /* Colors */
+    --theme-color-main: #4CAF50;
+    --theme-color-background: #111;
+    --theme-color-highlighted: #333;
+    --theme-color-selected: #fff;
+    /* Layout dimensions */
+    --layout-navbar-height-desktop: 75px;
+    --layout-navbar-height-mobile: 56px;
+}
+
 @media (min-width: 500px) {
     .Content {
         margin-top: var(--layout-navbar-height-desktop);
@@ -15,13 +26,5 @@
     }
 }
 
-:root {
-    /* Colors */
-    --theme-color-main: #4CAF50;
-    --theme-color-background: #111;
-    --theme-color-highlighted: #333;
-    --theme-color-selected: #fff;
-    /* Layout dimensions */
-    --layout-navbar-height-desktop: 95px;
-    --layout-navbar-height-mobile: 56px;
-}
+
+

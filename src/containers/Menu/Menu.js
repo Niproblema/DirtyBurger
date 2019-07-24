@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
  */
 let savedState = null;
 
-/* Food Menu btw */
+/* @Singleton - Food Menu btw */
 class Menu extends Component {
     state = savedState !== null ? savedState : {
         //Rerender dependant items - Only when these chnage it's okay to rerender.
@@ -110,7 +110,7 @@ class Menu extends Component {
             <div className={classes.Menu} >
                 <FoodTypeSelector categories={this.state.sortedCategories} />
                 <div className={classes.MenuMainContainer}>
-                    <FoodLetterSelector />
+                    <FoodLetterSelector items={this.state.sortedItems} />
                     <MenuContent items={this.state.sortedItems} />
                 </div>
             </div>

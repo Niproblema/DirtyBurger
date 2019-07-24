@@ -4,19 +4,19 @@
     background-color: greenyellow;
     text-align: center;
     margin: var(--menu-margin-big) ; 
-    height: 100px;
+    height: 60px;
 }
 
 @media (max-height: 650px){
     .TypeSelector{
-        height:55px;
+        height:52px;
         margin: var(--menu-margin-med) ; 
     }
 }
 
 @media (max-height: 500px){
     .TypeSelector{
-        height:55px;
+        height:45px;
         margin: var(--menu-margin-sm) ; 
     }
 }
