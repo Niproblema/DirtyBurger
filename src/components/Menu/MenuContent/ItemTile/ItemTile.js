@@ -1,5 +1,6 @@
 import React from 'react'
 import classes from './ItemTile.css'
+import ItemGraphics from './ItemGraphics/ItemGraphics'
 
 /**
  * ItemTile - Holds item image(icon/photo) + description(short/long) + add to order button.
@@ -9,7 +10,9 @@ import classes from './ItemTile.css'
 const ItemTile = (props) => {
     return (
         <div className={classes.ItemTile} >
-            {props.item.name}
+            <ItemGraphics name={props.item.name}/>
+            <p><strong>{props.item.name}</strong></p>
+            
         </div>
     );
 }

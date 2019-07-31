@@ -24,6 +24,7 @@
 
 .Logo {
     height: 95%;
+    cursor: pointer;
 }
 
 @media (max-width: 499px) {  /* Mobile */

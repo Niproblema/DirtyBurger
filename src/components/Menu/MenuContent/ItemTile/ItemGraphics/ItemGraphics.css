@@ -1,0 +1,14 @@
+@import '../ItemTile.css';
+.ItemGraphics {
+    display: block;
+    background-color: aqua;
+    left: 0;
+    height: 100%;
+    width: calc((var(--tile-height-medium) - 2 * var(--tile-padding)) * var(--tile-item-graphics-ratio-w) / var(--tile-item-graphics-ratio-h));
+    object-fit: contain
+}
+
+:root {
+    --tile-item-graphics-ratio-w: 5;
+    --tile-item-graphics-ratio-h: 3;
+}

@@ -1,11 +1,18 @@
 @import '../../../../containers/Layout/Layout.css';
-
-.ItemTile{
+.ItemTile {
     background-color: var(--theme-color-main);
-    height: 50px;
+    height: var(--tile-height-medium);
     /*flex: 1 1 auto;*/
     text-align: center;
     margin: 5px 5px 0 5px;
+    padding: var(--tile-padding);
     box-sizing: border-box;
-    display: block;
+    display: flex;
+}
+
+:root {
+    --tile-padding : 2px;
+    --tile-height-small: 40px;
+    --tile-height-medium: 50px;
+    --tile-height-large: 60px;
 }
